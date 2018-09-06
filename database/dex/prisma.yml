@@ -1,0 +1,9 @@
+endpoint: ${env:DEX_PRISMA_ENDPOINT}
+datamodel: dex.graphql
+
+# To enable auth, provide a secret
+secret: prisma
+hooks:
+  post-deploy:
+    - graphql get-schema --project dex
+    - graphql codegen

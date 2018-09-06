@@ -1,0 +1,209 @@
+# source: http://localhost:4466/wrap/dev
+# timestamp: Thu Sep 06 2018 12:05:38 GMT-0700 (Pacific Daylight Time)
+
+type AggregateHaloAccount {
+  count: Int!
+}
+
+type BatchPayload {
+  """The number of nodes that have been affected by the Batch operation."""
+  count: Long!
+}
+
+type HaloAccount {
+  haloAddress: String!
+}
+
+"""A connection to a list of items."""
+type HaloAccountConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [HaloAccountEdge]!
+  aggregate: AggregateHaloAccount!
+}
+
+input HaloAccountCreateInput {
+  haloAddress: String!
+}
+
+"""An edge in a connection."""
+type HaloAccountEdge {
+  """The item at the end of the edge."""
+  node: HaloAccount!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum HaloAccountOrderByInput {
+  haloAddress_ASC
+  haloAddress_DESC
+  id_ASC
+  id_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type HaloAccountPreviousValues {
+  haloAddress: String!
+}
+
+type HaloAccountSubscriptionPayload {
+  mutation: MutationType!
+  node: HaloAccount
+  updatedFields: [String!]
+  previousValues: HaloAccountPreviousValues
+}
+
+input HaloAccountSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [HaloAccountSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [HaloAccountSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [HaloAccountSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: HaloAccountWhereInput
+}
+
+input HaloAccountUpdateInput {
+  haloAddress: String
+}
+
+input HaloAccountWhereInput {
+  """Logical AND on all given filters."""
+  AND: [HaloAccountWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [HaloAccountWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [HaloAccountWhereInput!]
+  haloAddress: String
+
+  """All values that are not equal to given value."""
+  haloAddress_not: String
+
+  """All values that are contained in given list."""
+  haloAddress_in: [String!]
+
+  """All values that are not contained in given list."""
+  haloAddress_not_in: [String!]
+
+  """All values less than the given value."""
+  haloAddress_lt: String
+
+  """All values less than or equal the given value."""
+  haloAddress_lte: String
+
+  """All values greater than the given value."""
+  haloAddress_gt: String
+
+  """All values greater than or equal the given value."""
+  haloAddress_gte: String
+
+  """All values containing the given string."""
+  haloAddress_contains: String
+
+  """All values not containing the given string."""
+  haloAddress_not_contains: String
+
+  """All values starting with the given string."""
+  haloAddress_starts_with: String
+
+  """All values not starting with the given string."""
+  haloAddress_not_starts_with: String
+
+  """All values ending with the given string."""
+  haloAddress_ends_with: String
+
+  """All values not ending with the given string."""
+  haloAddress_not_ends_with: String
+}
+
+input HaloAccountWhereUniqueInput {
+  haloAddress: String
+}
+
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createHaloAccount(data: HaloAccountCreateInput!): HaloAccount!
+  updateHaloAccount(data: HaloAccountUpdateInput!, where: HaloAccountWhereUniqueInput!): HaloAccount
+  deleteHaloAccount(where: HaloAccountWhereUniqueInput!): HaloAccount
+  upsertHaloAccount(where: HaloAccountWhereUniqueInput!, create: HaloAccountCreateInput!, update: HaloAccountUpdateInput!): HaloAccount!
+  updateManyHaloAccounts(data: HaloAccountUpdateInput!, where: HaloAccountWhereInput): BatchPayload!
+  deleteManyHaloAccounts(where: HaloAccountWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  haloAccounts(where: HaloAccountWhereInput, orderBy: HaloAccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [HaloAccount]!
+  haloAccount(where: HaloAccountWhereUniqueInput!): HaloAccount
+  haloAccountsConnection(where: HaloAccountWhereInput, orderBy: HaloAccountOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): HaloAccountConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Subscription {
+  haloAccount(where: HaloAccountSubscriptionWhereInput): HaloAccountSubscriptionPayload
+}

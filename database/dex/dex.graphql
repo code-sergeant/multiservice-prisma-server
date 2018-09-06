@@ -1,0 +1,8 @@
+type Order {
+  id: ID! @unique
+  ask: String
+  bid: String
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+

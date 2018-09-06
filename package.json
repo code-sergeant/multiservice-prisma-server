@@ -1,0 +1,24 @@
+{
+  "name": "multiple-prisma-endpoints-example",
+  "version": "1.0.0",
+  "description": "Template for having a prisma server with multiple services",
+  "main": "index.js",
+  "author": "Steven Hernandez",
+  "license": "MIT",
+  "scripts": {
+    "deploy:wrapper:dev": "cd database/wrapper && prisma deploy --env-file ../../.env.dev ",
+    "deploy:wrapper:prod": "cd database/wrapper && prisma deploy --env-file ../../.env.prod ",
+    "deploy:dex:dev": "cd database/dex && prisma deploy --env-file ../../.env.dev ",
+    "deploy:dex:prod": "cd database/dex && prisma deploy --env-file ../../.env.prod",
+    "play:dex:dev": "cd database/dex && prisma playground --env-file ../../.env.dev ",
+    "play:dex:prod": "cd database/dex && prisma playground --env-file ../../.env.prod",
+    "play:wrapper:dev": "cd database/wrapper && prisma playground --env-file ../../.env.dev ",
+    "play:wrapper:prod": "cd database/wrapper && prisma playground --env-file ../../.env.prod "
+  },
+  "dependencies": {
+    "graphql": "^14.0.0",
+    "graphql-yoga": "^1.16.2",
+    "prisma-binding": "^2.1.5",
+    "typescript": "^3.0.3"
+  }
+}
